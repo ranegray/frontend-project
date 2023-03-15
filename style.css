@@ -11,7 +11,6 @@ body {
 header {
     margin: 3rem auto;
     padding: 2rem;
-    
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -19,9 +18,9 @@ header {
 
 .movies {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     place-items: center;
-    gap: 20px 20px;
+    gap: 20px 30px;
 }
 
 .movie-card {
@@ -50,8 +49,21 @@ a:hover {
     margin: 0 auto;
 }
 
-.movie-card .user-status img {
+.add-watch {
+    background: url("./icons8-eye-48-5.png");
+    height: 48px;
+    width: 48px;
+}
 
+.add-heart {
+    background: url("./icons8-favorite-48.png");
+    height: 48px;
+    width: 48px;
+}
+
+.poop {
+    font-size: 28px;
+    margin-right: 5px;
 }
 
 /* Mobile View */
