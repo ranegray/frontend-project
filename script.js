@@ -9,7 +9,6 @@ let $movies = $(".movies").infiniteScroll({
   history: false,
 });
 
-let watchlistArray = [];
 function makeMovieCards(data) {
   console.log(data);
   let movies = data.results;
@@ -21,14 +20,28 @@ function makeMovieCards(data) {
       let $img = $("<img>")
         .attr("src", `https://image.tmdb.org/t/p/original${movie.poster_path}`)
         .attr("width", 250);
-      let $title = $('<a></a>').attr('href', `https://www.themoviedb.org/movie/${movie.id}-${movie.title}`).attr('target', '_blank').append($("<h2>").text(
-        `${movie.title} (${
-          movie.release_date ? movie.release_date.slice(0, 4) : "2020"
-        })`
-      ));
-      
+      let $title = $("<a></a>")
+        .attr(
+          "href",
+          `https://www.themoviedb.org/movie/${movie.id}-${movie.title}`
+        )
+        .attr("target", "_blank")
+        .append(
+          $("<h2>").text(
+            `${movie.title} (${
+              movie.release_date ? movie.release_date.slice(0, 4) : "2020"
+            })`
+          )
+        );
+
       let $rating = $("<h3>").text(`💩 ${rating > 0 ? rating : 10}`);
-      let $addToWatchlist = $("<div></div>").addClass("add-watch");
+      let $addToWatchlist = $("<div></div>")
+        .addClass("add-watch")
+        .on("click", (event) => {
+          let watchlist = event.target.parentElement.innerHTML;
+          watchlistArray.push(watchlist);
+          console.log("Added to watchlist");
+        });
 
       $movieCard
         .append($img)
@@ -38,13 +51,6 @@ function makeMovieCards(data) {
 
       $(".movies").append($movieCard);
     }
-  });
-  let $addToWatchList = $(".add-watch");
-  $addToWatchList.on("click", (event) => {
-    let watchlist = event.target.parentElement.innerHTML;
-    watchlistArray.push(watchlist)
-    localStorage.setItem("watchlist", JSON.stringify(watchlist));
-    console.log("Added to watchlist");
   });
 }
 // initial render
@@ -58,4 +64,24 @@ $movies.on("load.infiniteScroll", (event, body) => {
   makeMovieCards(body);
 });
 
-// export default watchlist;
+let watchlistArray = [];
+if (localStorage.getItem("watchlist")) {
+  let watchlist = localStorage.getItem("watchlist");
+  watchlistArray = JSON.parse(watchlist);
+  localStorage.setItem("watchlist", JSON.stringify(watchlistArray));
+};
+
+$(".watchlist").on("click", () => {
+  if (watchlistArray.length > 0) {
+    localStorage.setItem("watchlist", JSON.stringify(watchlistArray));
+  }
+  location.href = "./watchlist.html";
+});
+
+// let $addToWatchList = $(".add-watch");
+// $addToWatchList.on("click", (event) => {
+//   let watchlist = event.target.parentElement.innerHTML;
+//   watchlistArray.push(JSON.stringify(watchlist));
+//   // localStorage.setItem("watchlist", JSON.stringify(watchlist));
+//   console.log("Added to watchlist");
+// });

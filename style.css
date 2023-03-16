@@ -9,7 +9,6 @@ body {
 }
 
 header {
-    margin: 3rem auto;
     padding: 2rem;
     display: flex;
     justify-content: space-between;
@@ -51,10 +50,11 @@ a:hover {
     position: absolute;
     bottom: 0;
     left: 0;
-    background: url("./icons8-eye-48-5.png");
+    background: url("./icons8-plus-48-2.png");
     height: 48px;
     width: 48px;
     margin: 10px;
+    cursor: pointer;
 }
 
 .poop {
