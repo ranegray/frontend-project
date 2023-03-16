@@ -24,13 +24,18 @@ header {
 }
 
 .movie-card {
+    position: relative;
     background-color: rgb(90, 90, 90);
     border: 1px solid lightgray;
-    height: 100%;
     border-radius: 10px;
+    height: 100%;
     margin: 10px;
     padding: 1rem 2rem;
     text-align: center;
+}
+
+.movie-card img {
+    width: 100%;
 }
 
 a {
@@ -42,23 +47,14 @@ a:hover {
     text-decoration: underline;
 }
 
-.movie-card .user-status {
-    display: flex;
-    justify-content: space-between;
-    width: 50%;
-    margin: 0 auto;
-}
-
 .add-watch {
+    position: absolute;
+    bottom: 0;
+    left: 0;
     background: url("./icons8-eye-48-5.png");
     height: 48px;
     width: 48px;
-}
-
-.add-heart {
-    background: url("./icons8-favorite-48.png");
-    height: 48px;
-    width: 48px;
+    margin: 10px;
 }
 
 .poop {
