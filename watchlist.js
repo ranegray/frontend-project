@@ -4,7 +4,6 @@ if (localStorage.getItem("watchlist")) {
   for (let i = 0; i < watchlist.length; i++) {
     let $movieCard = $(`<div class="movie-card">${watchlist[i]}</div>`);
     let $remove = $("<div></div>")
-      .attr("id", i)
       .addClass("remove")
       .on("click", (event) => {
         let removeTarget = event.target.parentElement;
