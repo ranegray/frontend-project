@@ -1,4 +1,4 @@
-const url = `https://api.themoviedb.org/3/discover/movie?sort_by=vote_average.asc&vote_average.gte=2.0&with_original_language=en&with_genres=27&vote_average.lte=5.5&api_key=4e45f0d44a3f2d2e2a90ecc57dd0a161`;
+const url = `https://api.themoviedb.org/3/discover/movie?sort_by=vote_average.asc&vote_average.gte=2.0&with_original_language=en&with_genres=27&vote_average.lte=5.5&include_adult=false&api_key=4e45f0d44a3f2d2e2a90ecc57dd0a161`;
 
 let $movies = $(".movies").infiniteScroll({
   path: function () {
@@ -14,12 +14,16 @@ function makeMovieCards(data) {
   let movies = data.results;
   console.log(movies);
   movies.forEach((movie) => {
-    let rating = Math.round((10 - movie.popularity) * 10) / 10;
+    let rating = Math.round((10 - movie.vote_average) * 10) / 10;
     if (movie.poster_path) {
       let $movieCard = $("<div></div>").addClass("movie-card");
-      let $img = $("<img>")
+      let $img = $("<a></a>")
+      .attr(
+        "href",
+        `https://www.themoviedb.org/movie/${movie.id}-${movie.title}`
+      ).append($("<img>")
         .attr("src", `https://image.tmdb.org/t/p/original${movie.poster_path}`)
-        .attr("width", 250);
+        .attr("width", 250));
       let $title = $("<a></a>")
         .attr(
           "href",
@@ -40,6 +44,7 @@ function makeMovieCards(data) {
         .on("click", (event) => {
           let watchlist = event.target.parentElement.innerHTML;
           watchlistArray.push(watchlist);
+          $addToWatchlist.addClass('added')
           console.log("Added to watchlist");
         });
 
