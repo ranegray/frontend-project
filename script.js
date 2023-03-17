@@ -1,4 +1,4 @@
-const url = `https://api.themoviedb.org/3/discover/movie?sort_by=vote_average.asc&vote_average.gte=2.0&with_original_language=en&with_genres=27&vote_average.lte=5.5&include_adult=false&api_key=4e45f0d44a3f2d2e2a90ecc57dd0a161`;
+const url = `https://api.themoviedb.org/3/discover/movie?sort_by=vote_average.asc&vote_average.gte=2.0&with_original_language=en&vote_average.lte=5.5&include_adult=false&api_key=4e45f0d44a3f2d2e2a90ecc57dd0a161`;
 
 let $movies = $(".movies").infiniteScroll({
   path: function () {
